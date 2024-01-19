@@ -4,7 +4,13 @@
 #include "p2List.h"
 #include "Primitive.h"
 
+#include "Bullet/include/btBulletDynamicsCommon.h"
+
 // TODO 1: Add Bullet common include btBulletDynamicsCommon.h
+
+#define GRAVITY btVector3(0.0f, -10.0f, 0.0f)
+
+
 
 class DebugDrawer;
 
@@ -20,15 +26,22 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
+	Sphere* s =  nullptr;
+
 private:
 
 	bool debug;
+	btDefaultCollisionConfiguration* collisionConfiguration;
+	btCollisionDispatcher* dispatcher;
+	btDbvtBroadphase* broadphase;
+	btSequentialImpulseConstraintSolver* solver;
+	btDiscreteDynamicsWorld* world;
 
 	DebugDrawer* debug_draw;
 };
 
 //TODO 4: Uncomment the declaration of the Debug Drawer
-/*
+
 class DebugDrawer : public btIDebugDraw
 {
 public:
@@ -45,5 +58,5 @@ public:
 	DebugDrawModes mode;
 	Line line;
 	Primitive point;
+	
 };
-*/

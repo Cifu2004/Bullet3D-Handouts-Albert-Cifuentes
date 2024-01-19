@@ -31,6 +31,8 @@ private:
 public:
 	Primitive* parentPrimitive;
 	p2DynArray<Module*> collision_listeners;
+	p2DynArray<btRigidBody*> btRigidBodies;
+	p2DynArray<btDefaultMotionState*> btDefaultMotionStates;
 };
 
 #endif // __PhysBody3D_H__

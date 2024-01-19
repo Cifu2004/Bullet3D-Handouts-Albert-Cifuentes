@@ -27,6 +27,7 @@ bool ModuleSceneIntro::Start()
 
 	float XPos = 0.f;
 	float Size = StartingSize;
+	Sphere* ese = nullptr;
 	for (int n = 0; n < SnakeLength; n++)
 	{
 		Sphere* s = new Sphere(Size);
@@ -37,10 +38,32 @@ bool ModuleSceneIntro::Start()
 
 		XPos += Size + Size + SizeIncrement + BallDistance;
 		Size += SizeIncrement;
+
+		if (ese != nullptr) {
+			App->physics->AddConstraintP2P(s->body, ese->body, vec3(0, 0, 0), vec3(4, 0, 0));
+		}
+		ese = s;
 	}
 
 	//TODO 4: Link some other spheres with your Hinge constraint
+	ese = nullptr;
+	XPos += 155;
 
+	for (int n = 0; n < SnakeLength; n++)
+	{
+		Sphere* s = new Sphere(Size);
+		primitives.PushBack(s);
+		s->SetPos(XPos, 10.f, 2.5f);
+
+		XPos += Size + Size + SizeIncrement + BallDistance;
+		Size += SizeIncrement;
+
+
+		if (ese != nullptr) {
+			App->physics->AddConstraintHinge(s->body, ese->body, vec3(0, 0, 4), vec3(4, 0, 0), vec3(0, 0, 0), vec3(0, 0, 1));
+		}
+		ese = s;
+	}
 	return ret;
 }
 
