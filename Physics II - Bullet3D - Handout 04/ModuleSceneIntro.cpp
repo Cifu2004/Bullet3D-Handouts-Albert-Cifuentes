@@ -47,7 +47,7 @@ bool ModuleSceneIntro::Start()
 
 	//TODO 4: Link some other spheres with your Hinge constraint
 	ese = nullptr;
-	XPos += 155;
+	XPos += 80;
 
 	for (int n = 0; n < SnakeLength; n++)
 	{
